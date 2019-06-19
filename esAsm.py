@@ -12,45 +12,49 @@ def runProgram(program):
 
     pc = 0
     registers = [0] * 12
-    
+
     while True:
         incPc = True
         
         curOp  = program[pc]
         opCode = curOp[0]
+
+        args = []
+        for arg in curOp:
+            args.append(resolveVal(arg, registers))
         
         if opCode == "shn":
-            print(resolveVal(curOp[1], registers))
+            print(args[1])
 
         if opCode == "sha":
-            print(chr(resolveVal(curOp[1], registers)))
+            print(chr(args[1]))
 
         if opCode == "mov":
-            registers[resolveReg(curOp[1])] = resolveVal(curOp[2], registers)
+            registers[resolveReg(curOp[1])] = args[2]
 
         if opCode == "add":
-            registers[resolveReg(curOp[1])] = resolveVal(curOp[2], registers) + resolveVal(curOp[3], registers)
+            registers[resolveReg(curOp[1])] = args[2] + args[3]
 
         if opCode == "sub":
-            registers[resolveReg(curOp[1])] = resolveVal(curOp[2], registers) - resolveVal(curOp[3], registers)
+            registers[resolveReg(curOp[1])] = args[2] - args[3]
            
         if opCode == "jlt":
-            if(resolveVal(curOp[2],registers) < resolveVal(curOp[3], registers)):
-                pc = resolveVal(curOp[1], registers)
+            if(args[2] < args[3]):
+                pc = args[1]
                 incPc = False
 
         if opCode == "jgt":
-            if(resolveVal(curOp[2],registers) > resolveVal(curOp[3], registers)):
-                pc = resolveVal(curOp[1], registers)
+            if(args[2] > args[3]):
+                pc = args[1]
                 incPc = False
 
         if opCode == "jet":
-            if(resolveVal(curOp[2],registers) == resolveVal(curOp[3], registers)):
-                pc = resolveVal(curOp[1], registers)
+            if(args[2] == args[3]):
+                pc = args[1]
                 incPc = False
 
         if opCode == "jmp":
-            pc = resolveVal(curOp[1], registers)
+            pc = args[1]
             incPc = False
 
         if opCode == "inp":
@@ -71,6 +75,7 @@ def resolveVal(val, reg):
         return int(val[1:])
     if(val[0] == "r"):
         return reg[resolveReg(val)]
+    #print("not resolved: " + val)
         
 def resolveReg(reg):
     return int(reg[1:])
@@ -79,8 +84,9 @@ def loadProgram(filename):
     program = []
     with open(filename) as f:
         for line in f:
-            noComLine = line.split(';')[0]
-            program.append(noComLine.rstrip().split(" "))
+            noComLine = line.split(';')[0].strip()
+            if noComLine:
+                program.append(noComLine.split(" "))
     return program
     
 if __name__ == "__main__":
