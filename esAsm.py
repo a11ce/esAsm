@@ -12,7 +12,7 @@ def runProgram(program):
 
     pc = 0
     registers = [0] * 12
-
+    
     while True:
         incPc = True
         
@@ -31,16 +31,40 @@ def runProgram(program):
         if opCode == "add":
             registers[resolveReg(curOp[1])] = resolveVal(curOp[2], registers) + resolveVal(curOp[3], registers)
 
-        if opCode == "gto":
+        if opCode == "sub":
+            registers[resolveReg(curOp[1])] = resolveVal(curOp[2], registers) - resolveVal(curOp[3], registers)
+           
+        if opCode == "jlt":
+            if(resolveVal(curOp[2],registers) < resolveVal(curOp[3], registers)):
+                pc = resolveVal(curOp[1], registers)
+                incPc = False
+
+        if opCode == "jgt":
+            if(resolveVal(curOp[2],registers) > resolveVal(curOp[3], registers)):
+                pc = resolveVal(curOp[1], registers)
+                incPc = False
+
+        if opCode == "jet":
+            if(resolveVal(curOp[2],registers) == resolveVal(curOp[3], registers)):
+                pc = resolveVal(curOp[1], registers)
+                incPc = False
+
+        if opCode == "jmp":
             pc = resolveVal(curOp[1], registers)
             incPc = False
 
-        
+        if opCode == "inp":
+            print("> ", end="")
+            registers[resolveReg(curOp[1])] = int(input())
+            
         if opCode == "hlt":
             break    
 
         if(incPc):
             pc += 1
+
+        if(pc == len(program)):
+            pc = 0
             
 def resolveVal(val, reg):
     if(val[0] == "#"):
