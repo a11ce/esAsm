@@ -59,9 +59,12 @@ def runProgram(program, labels):
             incPc = False
 
         if opCode == "inp":
-            print("> ", end="")
-            registers[resolveReg(curOp[1])] = int(input())
-            
+            if sys.stdin.isatty():
+                print("> ", end="")
+            try:
+                registers[resolveReg(curOp[1])] = int(input())
+            except EOFError:
+                sys.exit()
         if opCode == "hlt":
             break    
 
