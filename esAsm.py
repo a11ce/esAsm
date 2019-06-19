@@ -2,13 +2,13 @@ import sys
 
 def main():
 
-    program = loadProgram(sys.argv[1])
+    program, labels = loadProgram(sys.argv[1])
     try:
-        runProgram(program)
+        runProgram(program, labels)
     except IndexError:
         print("ERR: Program counter out of range")
         
-def runProgram(program):
+def runProgram(program, labels):
 
     pc = 0
     registers = [0] * 12
@@ -21,7 +21,8 @@ def runProgram(program):
 
         args = []
         for arg in curOp:
-            args.append(resolveVal(arg, registers))
+            args.append(resolveVal(arg, registers, labels))
+
         
         if opCode == "shn":
             print(args[1])
@@ -69,12 +70,16 @@ def runProgram(program):
 
         if(pc == len(program)):
             pc = 0
-            
-def resolveVal(val, reg):
+
+        #print(curOp)
+        #print(pc)
+def resolveVal(val, reg, lab):
     if(val[0] == "#"):
         return int(val[1:])
     if(val[0] == "r"):
         return reg[resolveReg(val)]
+    if(val in lab):
+        return lab[val]
     #print("not resolved: " + val)
         
 def resolveReg(reg):
@@ -82,12 +87,18 @@ def resolveReg(reg):
     
 def loadProgram(filename):
     program = []
+    labels  = {}
     with open(filename) as f:
         for line in f:
             noComLine = line.split(';')[0].strip()
             if noComLine:
-                program.append(noComLine.split(" "))
-    return program
+                #print(noComLine[-1])
+                if noComLine[-1] == ":":
+                    labels[noComLine[:-1]] = len(program)
+                else:
+                    program.append(noComLine.split(" "))
+    #print(program)
+    return program, labels
     
 if __name__ == "__main__":
     main()

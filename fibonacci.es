@@ -3,7 +3,7 @@ mov r0 #1
 mov r1 #1
 shn #1
 shn #1
-
+loopStart:
 ; add to find next term
 add r2 r0 r1
 
@@ -17,7 +17,8 @@ mov r1 r2
 ; increment term counter
 add r3 r3 #1
 ; stop at term 10 (including two initial)
-jet #11 r3 #8
+jet end r3 #8
 ; loop if not stopping
-jmp #4
+jmp loopStart
+end:
 hlt
