@@ -1,6 +1,6 @@
 # esAsm
 
-esAsm is a toy assembly-ish language meant to be fun to use. Everything is currently subject to change.
+esAsm is a toy assembly-ish language meant to be fun to use.
 
 
 ## Instruction list
