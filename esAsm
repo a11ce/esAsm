@@ -1,7 +1,11 @@
+#!/usr/bin/env python3
 import sys
 
 def main():
 
+    if len(sys.argv) == 1:
+        print("please provide a file to run as a command line argument")
+        sys.exit(1)
     program, labels = loadProgram(sys.argv[1])
     try:
         runProgram(program, labels)
