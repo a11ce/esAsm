@@ -17,7 +17,7 @@ mov r1 r2
 ; increment term counter
 add r3 r3 #1
 ; stop at term 10 (including two initial)
-jet end r3 #8
+jet end r3 #10
 ; loop if not stopping
 jmp loopStart
 end:
