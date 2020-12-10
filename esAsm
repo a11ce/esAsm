@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
+
 def main():
 
     if len(sys.argv) == 1:
@@ -11,7 +12,8 @@ def main():
         runProgram(program, labels)
     except IndexError:
         print("ERR: Program counter out of range")
-        
+
+
 def runProgram(program, labels):
 
     pc = 0
@@ -19,15 +21,14 @@ def runProgram(program, labels):
 
     while True:
         incPc = True
-        
-        curOp  = program[pc]
+
+        curOp = program[pc]
         opCode = curOp[0]
 
         args = []
         for arg in curOp:
             args.append(resolveVal(arg, registers, labels))
 
-        
         if opCode == "shn":
             print(args[1])
 
@@ -42,19 +43,19 @@ def runProgram(program, labels):
 
         if opCode == "sub":
             registers[resolveReg(curOp[1])] = args[2] - args[3]
-           
+
         if opCode == "jlt":
-            if(args[2] < args[3]):
+            if (args[2] < args[3]):
                 pc = args[1]
                 incPc = False
 
         if opCode == "jgt":
-            if(args[2] > args[3]):
+            if (args[2] > args[3]):
                 pc = args[1]
                 incPc = False
 
         if opCode == "jet":
-            if(args[2] == args[3]):
+            if (args[2] == args[3]):
                 pc = args[1]
                 incPc = False
 
@@ -70,31 +71,34 @@ def runProgram(program, labels):
             except EOFError:
                 sys.exit()
         if opCode == "hlt":
-            break    
+            break
 
-        if(incPc):
+        if (incPc):
             pc += 1
 
-        if(pc == len(program)):
+        if (pc == len(program)):
             pc = 0
+
 
         #print(curOp)
         #print(pc)
 def resolveVal(val, reg, lab):
-    if(val[0] == "#"):
+    if (val[0] == "#"):
         return int(val[1:])
-    if(val[0] == "r"):
+    if (val[0] == "r"):
         return reg[resolveReg(val)]
-    if(val in lab):
+    if (val in lab):
         return lab[val]
     #print("not resolved: " + val)
-        
+
+
 def resolveReg(reg):
     return int(reg[1:])
-    
+
+
 def loadProgram(filename):
     program = []
-    labels  = {}
+    labels = {}
     with open(filename) as f:
         for line in f:
             noComLine = line.split(';')[0].strip()
@@ -106,6 +110,7 @@ def loadProgram(filename):
                     program.append(noComLine.split(" "))
     #print(program)
     return program, labels
-    
+
+
 if __name__ == "__main__":
     main()
