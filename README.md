@@ -39,6 +39,7 @@ In this documentation, `val` means any literal or register, `reg` means any regi
 - `sha val` prints the ascii character with the decimal value x.
 - `mov reg val` sets the value of `reg` to `val`.
 - `add reg val1 val2` sets the value of `reg` to `val1` + `val2`.
+- `sub reg val1 val2` sets the value of `reg` to `val1` - `val2`.
 - `jmp lab` moves the program execution to `lab`.
 - `jlt lab val1 val2` moves the program execution to `lab` if `val1` < `val2`.
 - `jgt lab val1 val2` moves the program execution to `lab` if `val1` > `val2`.
@@ -54,6 +55,7 @@ In this documentation, `val` means any literal or register, `reg` means any regi
 |sha    | Show as ascii        | sha val
 |mov    | Move                 | mov reg val
 |add    | Add                  | add reg val1 val2
+|sub    | Subtract             | sub reg val1 val2
 |jmp    | Jump                 | jmp lab
 |jlt    | Jump if less than    | jlt lab val1 val2
 |jgt    | Jump if greater than | jgt lab val1 val2
