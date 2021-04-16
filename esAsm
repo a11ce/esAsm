@@ -74,6 +74,8 @@ def runProgram(program, labels):
             break
 
         # https://twitter.com/ppcinstructions/status/559753895757742083
+        # Behavior of esAsm is undefined if the computer is on fire, so it
+        # can be ignored.
         if opCode == "mficofsr":
             registers[resolveReg(curOp[1])] = 0
 

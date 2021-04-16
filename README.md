@@ -69,5 +69,5 @@ In this documentation, `val` means any literal or register, `reg` means any regi
 ---
 
 All contributions are welcome by pull request or issue.
-
+Behavior of esAsm is undefined if the computer is on fire.
 esAsm is licensed under GNU General Public License v3.0. See [LICENSE](../master/LICENSE) for full text.

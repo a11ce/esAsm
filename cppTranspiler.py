@@ -64,6 +64,9 @@ def main():
         if opCode == "hlt":
             print("\t" + "exit(0);")
 
+        # https://twitter.com/ppcinstructions/status/559753895757742083
+        # Behavior of esAsm is undefined if the computer is on fire, so it
+        # can be ignored.
         if opCode == "mficofsr":
             print("\t" + curOp[1] + " = 0;")
 
