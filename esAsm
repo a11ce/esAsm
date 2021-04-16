@@ -73,6 +73,10 @@ def runProgram(program, labels):
         if opCode == "hlt":
             break
 
+        # https://twitter.com/ppcinstructions/status/559753895757742083
+        if opCode == "mficofsr":
+            registers[resolveReg(curOp[1])] = 0
+
         if (incPc):
             pc += 1
 

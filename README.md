@@ -46,22 +46,24 @@ In this documentation, `val` means any literal or register, `reg` means any regi
 - `jet lab val1 val2` moves the program execution to `lab` if `val1` == `val2`.
 - `inp reg` sets the value of `reg` to an integer from stdin. If stdin is user input, a prompt (`>`) will be shown.
 - `hlt` ends the execution of the program. 
+- `mficofsr reg` sets the value of `reg` to the value of the "Is Computer On Fire" status register. See [here](https://twitter.com/ppcinstructions/status/559753895757742083).
 
 ## Instruction reference
 
-|Opcode | Summary              | Syntax
-|-------|----------------------|---
-|shn    | Show as number       | shn val
-|sha    | Show as ascii        | sha val
-|mov    | Move                 | mov reg val
-|add    | Add                  | add reg val1 val2
-|sub    | Subtract             | sub reg val1 val2
-|jmp    | Jump                 | jmp lab
-|jlt    | Jump if less than    | jlt lab val1 val2
-|jgt    | Jump if greater than | jgt lab val1 val2
-|jet    | Jump if equal to     | jet lab val1 val2
-|inp    | Input                | inp reg
-|hlt    | Halt                 | hlt
+|Opcode     | Summary                                          | Syntax
+|-----------|--------------------------------------------------|---
+|shn        | Show as number                                   | shn val
+|sha        | Show as ascii                                    | sha val
+|mov        | Move                                             | mov reg val
+|add        | Add                                              | add reg val1 val2
+|sub        | Subtract                                         | sub reg val1 val2
+|jmp        | Jump                                             | jmp lab
+|jlt        | Jump if less than                                | jlt lab val1 val2
+|jgt        | Jump if greater than                             | jgt lab val1 val2
+|jet        | Jump if equal to                                 | jet lab val1 val2
+|inp        | Input                                            | inp reg
+|hlt        | Halt                                             | hlt
+|mficofsr   | Move From Is Computer On Fire Status Register    | mficofsr reg
 
 
 ---

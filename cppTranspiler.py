@@ -64,6 +64,9 @@ def main():
         if opCode == "hlt":
             print("\t" + "exit(0);")
 
+        if opCode == "mficofsr":
+            print("\t" + curOp[1] + " = 0;")
+
         labelCount += 1
         print()
 
