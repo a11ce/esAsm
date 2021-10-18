@@ -4,3 +4,4 @@
 
 (define deps '("base"
                "parser-tools-lib"))
+(define scribblings '(("scribblings/esAsm.scrbl")))
