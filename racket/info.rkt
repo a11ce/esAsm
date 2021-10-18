@@ -4,4 +4,9 @@
 
 (define deps '("base"
                "parser-tools-lib"))
+
+
+(define build-deps '("racket-doc"
+                     "scribble-lib"))
+               
 (define scribblings '(("scribblings/esAsm.scrbl")))
