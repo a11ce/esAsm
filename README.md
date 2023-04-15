@@ -1,42 +1,25 @@
 # esAsm
 
-> esAsm is a toy assembly-ish language meant to be fun to use.
+> esAsm is a toy assembly-like language 
 
 ## Installation
 
-- Download with `git clone https://github.com/a11ce/esAsm.git`
-- Install with `python3 setup.py install`
-- Run (anywhere) with `esAsm`
-
-## Usage
-
-- Run `esAsm <file>` to execute the given file.
-- In the esAsm directory, run `python3 cppTranspiler.py <file>` to output transpiled C++ code or `./compile.sh <file>` to automatically compile it.
-
-## Examples
-
-There are a few examples in the `examples/` directory.
-
-- `adder.es` adds two inputted numbers and outputs the result.
-- `subber.es` subtracts the second inputted number from the first and outputs the result, halting if the difference is negative and looping otherwise.
-- `isEven.es` outputs `Y` if the inputted number is even and `N` otherwise. 
-- `compare.es` outputs `G`, `L`, or `E` if the first inputted number is respectively greater, less, or equal to the second.
-- `fibonacci.es` outputs the first 10 terms of the Fibonacci sequence. It is also fully commented.
+`raco pkg install esAsm`
 
 ## The esAsm language
 
 - Each line in an esAsm file may contain whitespace, a comment, a label, or an instruction.
-- Comment lines begin with `;` and are ignored by the interpreter.
-- Labels end with `:`.
-- Literals are prefixed with `#`, and register references are prefixed with `r`.
-- The program execution is moved to the beginning if it reaches the end of the file. It will continue looping until the `hlt` instructions.
+- Comment lines begin with `;` and are ignored. Lines starting with `#lang esAsm` are also ignored.
+- Labels are indicated with the suffix `:`. The `:` is not part of the label name when referenced elsewhere.
+- Literal integers are prefixed with `#`, and register references are prefixed with `r`. The registers are `r0`-`r11`.
+- Program execution is moved to the beginning of a file when the end is reached. It will continue looping until the `hlt` instruction.
 
 ### Instructions
 
-In this documentation, `val` means any literal or register, `reg` means any register, and `lab` means any label.
+In this documentation, `val` means any literal or register, `reg` means a register, and `lab` means a label.
 
-- `shn val` prints the numeric value of x, which may be a literal or register.
-- `sha val` prints the ascii character with the decimal value x.
+- `shn val` prints the numeric value of `val`.
+- `sha val` prints the ascii character with the decimal value `val`.
 - `mov reg val` sets the value of `reg` to `val`.
 - `add reg val1 val2` sets the value of `reg` to `val1` + `val2`.
 - `sub reg val1 val2` sets the value of `reg` to `val1` - `val2`.
@@ -44,13 +27,26 @@ In this documentation, `val` means any literal or register, `reg` means any regi
 - `jlt lab val1 val2` moves the program execution to `lab` if `val1` < `val2`.
 - `jgt lab val1 val2` moves the program execution to `lab` if `val1` > `val2`.
 - `jet lab val1 val2` moves the program execution to `lab` if `val1` == `val2`.
-- `inp reg` sets the value of `reg` to an integer from stdin. If stdin is user input, a prompt (`>`) will be shown.
+- `inp reg` sets the value of `reg` to an integer from read from stdin.
 - `hlt` ends the execution of the program. 
 - `mficofsr reg` sets the value of `reg` to the value of the "Is Computer On Fire" status register. See [here](https://twitter.com/ppcinstructions/status/559753895757742083).
 
+## Examples
+
+There are a few examples in the `examples/` directory.
+
+- `read-six-numbers.es.rkt` reads six numbers and prints their sum.
+- `is-even.es.rkt` prints `Y` if the given number is even and `N` if it's odd. 
+- `compare.es.rkt` prints `G`, `L`, or `E` if the first number is respectively greater, less, or equal to the second.
+- `fibonacci.es.rkt` prints the first 10 terms of the Fibonacci sequence. 
+- `factors.es.rkt` prints the factors of a given number. 
+- `no-jump.es.rkt` demonstrates the branchless sublanguage.
+
+For testing purposes, `inp` is replaced (commented) in the examples.
+
 ## Instruction reference
 
-|Opcode     | Summary                                          | Syntax
+|Name       | Summary                                          | Syntax
 |-----------|--------------------------------------------------|---
 |shn        | Show as number                                   | shn val
 |sha        | Show as ascii                                    | sha val
@@ -65,11 +61,10 @@ In this documentation, `val` means any literal or register, `reg` means any regi
 |hlt        | Halt                                             | hlt
 |mficofsr   | Move From Is Computer On Fire Status Register    | mficofsr reg
 
-
 ---
 
-All contributions are welcome by pull request or issue.
+All contributions are welcome by pull request or issue, especially new instructions.
 
 Behavior of esAsm is undefined if the computer is on fire.
 
-esAsm is licensed under GNU General Public License v3.0. See [LICENSE](../master/LICENSE) for full text.
+esAsm is licensed under the MIT license. See [LICENSE](../master/LICENSE) for full text.

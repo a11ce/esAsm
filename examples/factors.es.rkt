@@ -1,4 +1,7 @@
-inp r0
+#lang esAsm
+; input replaced for testing
+;inp r0
+mov r0 #10
 
 mov r2 #0
 

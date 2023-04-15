@@ -1,7 +1,11 @@
+#lang esAsm
 ; take numeric input and store it in register 0
-inp r0
+; input removed for testing
+;inp r0
+mov r0 #27
 ; take numeric input and store it in register 1
-inp r1
+;inp r1
+mov r1 #42
 
 ; jump to less if r0 < r1
 jlt less r0 r1

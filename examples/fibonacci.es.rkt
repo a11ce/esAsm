@@ -1,3 +1,4 @@
+#lang esAsm
 ; initial values
 mov r0 #1
 mov r1 #1

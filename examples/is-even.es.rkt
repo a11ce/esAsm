@@ -1,5 +1,8 @@
+#lang esAsm
 ; take numeric input and store it in register 0
-inp r0
+; input removed for testing
+;inp r0
+mov r0 #42
 
 ; loop label
 l:
@@ -20,10 +23,10 @@ jmp l
 y:
 ; print 'Y'
 sha #89
-; go back to the start
-jmp #0
+; found an even number! we're done
+hlt
 
 n:
 ; print 'N'
 sha #78
-; implicit loop
+; implicit loop (until we get an even number)
